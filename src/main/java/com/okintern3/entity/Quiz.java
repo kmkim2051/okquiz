@@ -23,7 +23,7 @@ public class Quiz extends BaseTimeEntity {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToMany(mappedBy = "quiz")
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     private List<QuizOption> options = new ArrayList<>();
 
     private Long answerOptionId;
