@@ -15,12 +15,16 @@ public class QuizOption extends BaseTimeEntity {
 
     private String text;
 
+    private boolean isAnswer;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
 
-    public QuizOption(String text, Quiz quiz) {
+
+    public QuizOption(String text, boolean isAnswer, Quiz quiz) {
         this.text = text;
+        this.isAnswer = isAnswer;
         this.quiz = quiz;
         quiz.addOption(this);
     }
