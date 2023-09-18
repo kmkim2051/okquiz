@@ -19,6 +19,7 @@ public class Quiz extends BaseTimeEntity {
 
     private String question;
 
+    @Enumerated(EnumType.STRING)
     private QuizType quizType;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
@@ -26,9 +27,7 @@ public class Quiz extends BaseTimeEntity {
     private Category category;
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
-    private List<QuizOption> options = new ArrayList<>();
-
-    private String answerDescription;
+    private final List<QuizOption> options = new ArrayList<>();
 
     public Quiz(String question, Category category, QuizType quizType) {
         this.question = question;
