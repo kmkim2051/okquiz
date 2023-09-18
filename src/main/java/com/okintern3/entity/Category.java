@@ -15,7 +15,7 @@ public class Category extends BaseTimeEntity {
 
     private String name;
 
-    private Category(String name) {
+    public Category(String name) {
         this.name = name;
     }
 }
