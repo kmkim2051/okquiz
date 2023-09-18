@@ -32,10 +32,10 @@ class OkIntern3ApplicationTests {
 		Category category = new Category("클라우드");
 
 		Quiz quiz = new Quiz("question1", category, QuizType.MULTI_OPTION);
-		QuizOption quizOption = new QuizOption("answer", true, quiz);
-		QuizOption quizOption2 = new QuizOption("notanswer1", false, quiz);
-		QuizOption quizOption3 = new QuizOption("notanswer2", false, quiz);
-		QuizOption quizOption4 = new QuizOption("notanswer3", false, quiz);
+		QuizOption quizOption = new QuizOption("answer",  true, quiz, "this is answer");
+		QuizOption quizOption2 = new QuizOption("not answer1", false, quiz);
+		QuizOption quizOption3 = new QuizOption("not answer2", false, quiz);
+		QuizOption quizOption4 = new QuizOption("not answer3", false, quiz);
 
 		quizRepository.save(quiz);
 
