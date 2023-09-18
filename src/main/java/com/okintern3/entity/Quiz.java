@@ -19,25 +19,25 @@ public class Quiz extends BaseTimeEntity {
 
     private String question;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    private QuizType quizType;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")
     private Category category;
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     private List<QuizOption> options = new ArrayList<>();
 
-    private Long answerOptionId;
-
     private String answerDescription;
 
-    public Quiz(String question, Category category, Long answerOptionId, String answerDescription) {
+    public Quiz(String question, Category category, QuizType quizType) {
         this.question = question;
         this.category = category;
-        this.answerOptionId = answerOptionId;
-        this.answerDescription = answerDescription;
+        this.quizType = quizType;
     }
 
     public void addOption(QuizOption option) {
         options.add(option);
     }
+
 }
