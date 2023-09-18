@@ -7,11 +7,11 @@ import com.okintern3.entity.QuizType;
 import com.okintern3.repository.CategoryRepository;
 import com.okintern3.repository.QuizRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
+import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 class OkIntern3ApplicationTests {
@@ -22,8 +22,17 @@ class OkIntern3ApplicationTests {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
+	@Autowired
+	private MockMvc mockMvc;
+
 	@Test
 	void contextLoads() {
+	}
+
+	@AfterEach
+	void clearRepository() {
+		quizRepository.deleteAll();
+		categoryRepository.deleteAll();
 	}
 
 	@Test
@@ -46,5 +55,4 @@ class OkIntern3ApplicationTests {
 		Assertions.assertThat(findQuiz.getQuestion()).isEqualTo("question1");
 		Assertions.assertThat(findQuiz.getQuizType()).isEqualTo(QuizType.MULTI_OPTION);
 	}
-
 }
