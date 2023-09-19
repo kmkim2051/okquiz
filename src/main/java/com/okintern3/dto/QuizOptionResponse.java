@@ -21,7 +21,7 @@ public class QuizOptionResponse {
     public static QuizOptionResponse of(QuizOption quizOption) {
         return new QuizOptionResponse(
                 quizOption.getId(),
-                quizOption.getText(),
+                quizOption.getContent(),
                 quizOption.isAnswer(),
                 quizOption.getDescription()
         );

@@ -23,12 +23,12 @@ public class QuizOption extends BaseTimeEntity {
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
 
-    public QuizOption(String text, boolean isAnswer, Quiz quiz) {
-        this(text, isAnswer, quiz, null);
+    public QuizOption(String content, boolean isAnswer, Quiz quiz) {
+        this(content, isAnswer, quiz, null);
     }
 
-    public QuizOption(String text, boolean isAnswer, Quiz quiz, String description) {
-        this.text = text;
+    public QuizOption(String content, boolean isAnswer, Quiz quiz, String description) {
+        this.content = content;
         this.description = description;
         this.isAnswer = isAnswer;
         this.quiz = quiz;
