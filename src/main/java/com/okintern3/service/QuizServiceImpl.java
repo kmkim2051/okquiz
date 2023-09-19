@@ -5,6 +5,8 @@ import com.okintern3.dto.QuizReadResponse;
 import com.okintern3.dto.QuizTakeRequest;
 import com.okintern3.entity.Category;
 import com.okintern3.entity.QuizLog;
+import com.okintern3.exception.CategoryNotFoundException;
+import com.okintern3.exception.QuizNotFoundException;
 import com.okintern3.repository.CategoryRepository;
 import com.okintern3.repository.QuizLogRepository;
 import com.okintern3.repository.QuizRepository;
@@ -40,7 +42,7 @@ public class QuizServiceImpl implements QuizService {
         // todo: 공통 예외처리
         final Category category = categoryRepository
                 .findByName(categoryName)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 카테고리 이름입니다."));
+                .orElseThrow(() -> new CategoryNotFoundException("존재하지 않는 카테고리 이름입니다."));
 
         Random random = new Random();
 
@@ -61,7 +63,7 @@ public class QuizServiceImpl implements QuizService {
     public void takeQuiz(QuizTakeRequest request) {
         Long quizId = request.getQuizId();
         quizRepository.findById(quizId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 퀴즈 id입니다."));
+                .orElseThrow(() -> new QuizNotFoundException("존재하지 않는 퀴즈 id입니다."));
         // 퀴즈 응시
         quizLogRepository.save(request.toEntity());
     }
