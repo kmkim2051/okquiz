@@ -44,7 +44,7 @@ public class QuizReadResponse {
                 options,
                 answer,
                 -1, // todo: 정답률 계산
-                answer.getDescription(),
+                answer.getDesc(),
                 quiz.getQuizType()
         );
     }
