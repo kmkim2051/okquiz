@@ -36,7 +36,7 @@ public class QuizReadResponse {
         QuizOptionResponse answer = options.stream()
                 .filter(QuizOptionResponse::isAnswer)
                 .findFirst()
-                .get();
+                .orElseThrow(() -> new IllegalStateException("퀴즈에 정답 선택지가 존재하지 않습니다."));
 
         return new QuizReadResponse(
                 quiz.getId(),
