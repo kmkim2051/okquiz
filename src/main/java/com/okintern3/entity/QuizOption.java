@@ -13,7 +13,7 @@ public class QuizOption extends BaseTimeEntity {
     @Column(name = "option_id")
     private Long id;
 
-    private String text;
+    private String content;
 
     private String description;
 
