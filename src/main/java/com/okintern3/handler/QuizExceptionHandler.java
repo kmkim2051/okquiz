@@ -1,27 +1,26 @@
 package com.okintern3.handler;
 
 import com.okintern3.common.ApiResponse;
+import com.okintern3.common.ResultStatus;
 import com.okintern3.exception.AnswerNotFoundException;
 import com.okintern3.exception.CategoryNotFoundException;
 import com.okintern3.exception.QuizNotFoundException;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class QuizExceptionHandler {
 
     @ExceptionHandler(AnswerNotFoundException.class)
-    public ApiResponse handleNotFoundException(AnswerNotFoundException ex) {
-        return ApiResponse.fail(ex.getMessage());
-    }
-
-    @ExceptionHandler(CategoryNotFoundException.class)
-    public ApiResponse handleNotFoundException(CategoryNotFoundException ex) {
-        return ApiResponse.fail(ex.getMessage());
+    public ApiResponse handleAnswerNotFoundException(AnswerNotFoundException ex) {
+        return ApiResponse.fail(ResultStatus.ANSWER_OPTION_NOT_FOUND);
     }
 
     @ExceptionHandler(QuizNotFoundException.class)
-    public ApiResponse handleNotFoundException(QuizNotFoundException ex) {
-        return ApiResponse.fail(ex.getMessage());
+    public ApiResponse handleQuizNotFoundException(QuizNotFoundException ex) {
+        return ApiResponse.fail(ResultStatus.QUIZ_NOT_FOUND);
     }
 }
