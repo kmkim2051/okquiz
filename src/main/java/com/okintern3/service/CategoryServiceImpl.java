@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public List<CategoryResponse> getAllCategories() {
