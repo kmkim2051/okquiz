@@ -17,6 +17,10 @@ public class QuizOptionResponse {
 
     private String desc;
 
+    public boolean getIsAnswer() {
+        return this.isAnswer;
+    }
+
     public static QuizOptionResponse of(QuizOption quizOption) {
         return new QuizOptionResponse(
                 quizOption.getId(),

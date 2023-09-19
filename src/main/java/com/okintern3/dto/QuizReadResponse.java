@@ -35,7 +35,7 @@ public class QuizReadResponse {
                 .toList();
 
         QuizOptionResponse answer = options.stream()
-                .filter(QuizOptionResponse::isAnswer)
+                .filter(QuizOptionResponse::getIsAnswer)
                 .findFirst()
                 .orElseThrow(() -> new AnswerNotFoundException("퀴즈에 정답 선택지가 존재하지 않습니다."));
 

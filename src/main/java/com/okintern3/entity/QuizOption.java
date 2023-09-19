@@ -15,6 +15,7 @@ public class QuizOption {
 
     private String content;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     private boolean isAnswer;
