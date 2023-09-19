@@ -6,17 +6,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 @AllArgsConstructor
 public class QuizOptionResponse {
 
     private long id;
 
-    private String content;
+    private String text;
 
     private boolean isAnswer;
 
-    private String description;
+    private String desc;
+
+    public boolean getIsAnswer() {
+        return this.isAnswer;
+    }
 
     public static QuizOptionResponse of(QuizOption quizOption) {
         return new QuizOptionResponse(

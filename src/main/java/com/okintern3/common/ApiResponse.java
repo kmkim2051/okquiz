@@ -32,7 +32,7 @@ public class ApiResponse<T> {
 
     public static <T> ApiResponse<List<T>> success(List<T> data) {
         return new ApiResponse<>(
-                data, ResultStatus.SUCCESS,ResultStatus.SUCCESS.getMessage()
+                data, ResultStatus.SUCCESS, ResultStatus.SUCCESS.getMessage()
         );
     }
 
@@ -42,9 +42,27 @@ public class ApiResponse<T> {
         );
     }
 
-    public static <T> ApiResponse<T> fail(String message) {
+    public static <T> ApiResponse<T> fail(ResultStatus status) {
         return new ApiResponse<>(
-                null, ResultStatus.FAIL, message
+                null, status, status.getMessage()
+        );
+    }
+
+    public static <T> ApiResponse<T> fail(ResultStatus status, String message) {
+        return new ApiResponse<>(
+                null, status, message
+        );
+    }
+
+    public static <T> ApiResponse<T> error() {
+        return new ApiResponse<>(
+                null, ResultStatus.ERROR, ResultStatus.ERROR.getMessage()
+        );
+    }
+
+    public static <T> ApiResponse<T> error(String message) {
+        return new ApiResponse<>(
+                null, ResultStatus.ERROR, message
         );
     }
 }

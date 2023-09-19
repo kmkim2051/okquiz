@@ -2,6 +2,7 @@ package com.okintern3.dto;
 
 import com.okintern3.entity.Quiz;
 import com.okintern3.entity.QuizType;
+import com.okintern3.exception.AnswerNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,17 +35,17 @@ public class QuizReadResponse {
                 .toList();
 
         QuizOptionResponse answer = options.stream()
-                .filter(QuizOptionResponse::isAnswer)
+                .filter(QuizOptionResponse::getIsAnswer)
                 .findFirst()
-                .orElseThrow(() -> new IllegalStateException("퀴즈에 정답 선택지가 존재하지 않습니다."));
+                .orElseThrow(() -> new AnswerNotFoundException("퀴즈에 정답 선택지가 존재하지 않습니다."));
 
         return new QuizReadResponse(
                 quiz.getId(),
                 quiz.getQuestion(),
                 options,
                 answer,
-                -1, // todo: 정답률 계산
-                answer.getDescription(),
+                -1,
+                answer.getDesc(),
                 quiz.getQuizType()
         );
     }

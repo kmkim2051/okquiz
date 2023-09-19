@@ -2,12 +2,11 @@ package com.okintern3.controller;
 
 import com.okintern3.common.ApiResponse;
 import com.okintern3.dto.QuizReadResponse;
+import com.okintern3.dto.QuizTakeRequest;
 import com.okintern3.service.QuizService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +22,9 @@ public class QuizController {
         return ApiResponse.success(quizzes);
     }
 
-
+    @PostMapping("/{category}/test/quiz")
+    public ApiResponse solveQuiz(@RequestBody QuizTakeRequest quizTakeRequest) {
+        quizService.takeQuiz(quizTakeRequest);
+        return ApiResponse.success();
+    }
 }

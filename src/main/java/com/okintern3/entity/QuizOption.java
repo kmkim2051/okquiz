@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-public class QuizOption extends BaseTimeEntity {
+public class QuizOption {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "option_id")
@@ -15,6 +15,7 @@ public class QuizOption extends BaseTimeEntity {
 
     private String content;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     private boolean isAnswer;

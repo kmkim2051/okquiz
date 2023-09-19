@@ -1,15 +1,18 @@
 package com.okintern3.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import com.okintern3.entity.QuizLog;
+import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class QuizTakeRequest {
 
-    private Long id;
+    private Long quizId;
 
     private Boolean isCorrect;
+
+    public QuizLog toEntity() {
+        return new QuizLog(null, quizId, isCorrect);
+    }
 }
