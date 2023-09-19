@@ -43,7 +43,7 @@ public class QuizReadResponse {
                 quiz.getQuestion(),
                 options,
                 answer,
-                -1, // todo: 정답률 계산
+                -1,
                 answer.getDesc(),
                 quiz.getQuizType()
         );
