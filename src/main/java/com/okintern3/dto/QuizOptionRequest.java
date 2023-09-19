@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class QuizOptionRequest {
 
-    private String content;
+    private String text;
 
     private boolean isAnswer;
 }
