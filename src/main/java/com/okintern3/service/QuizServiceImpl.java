@@ -4,13 +4,16 @@ import com.okintern3.dto.QuizCreateRequest;
 import com.okintern3.dto.QuizReadResponse;
 import com.okintern3.dto.QuizTakeRequest;
 import com.okintern3.entity.Category;
+import com.okintern3.entity.QuizLog;
 import com.okintern3.repository.CategoryRepository;
+import com.okintern3.repository.QuizLogRepository;
 import com.okintern3.repository.QuizRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +22,8 @@ public class QuizServiceImpl implements QuizService {
     private final CategoryRepository categoryRepository;
 
     private final QuizRepository quizRepository;
+
+    private final QuizLogRepository quizLogRepository;
 
     @Override
     @Transactional
@@ -29,24 +34,35 @@ public class QuizServiceImpl implements QuizService {
     @Override
     @Transactional(readOnly = true)
     public List<QuizReadResponse> getQuizzesByCategoryName(String categoryName) {
+
+        final int NUMBER_OF_QUIZ_IN_TEST = 15;
+
         // todo: 공통 예외처리
         final Category category = categoryRepository
                 .findByName(categoryName)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 카테고리 이름입니다."));
 
-        List<QuizReadResponse> quizReadResponses = quizRepository.findByCategory(category)
+        Random random = new Random();
+
+        return quizRepository.findByCategory(category)
                 .stream()
+                .sorted((a, b) -> random.nextInt(3) - 1)
+                .limit(NUMBER_OF_QUIZ_IN_TEST)
                 .map(QuizReadResponse::of)
+                .peek(quizResponse -> {
+                    final double ratio = quizLogRepository.calculateAnswerRatio(quizResponse.getId());
+                    quizResponse.setAnswerRate((int) Math.round(ratio * 100));
+                })
                 .toList();
-
-        // todo: 정답률 주입하기(아마 JPQL)
-
-        return quizReadResponses;
     }
 
     @Override
     @Transactional
     public void takeQuiz(QuizTakeRequest request) {
+        Long quizId = request.getQuizId();
+        quizRepository.findById(quizId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 퀴즈 id입니다."));
         // 퀴즈 응시
+        quizLogRepository.save(request.toEntity());
     }
 }
