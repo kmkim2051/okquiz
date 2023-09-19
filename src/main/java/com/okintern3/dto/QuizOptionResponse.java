@@ -12,7 +12,7 @@ public class QuizOptionResponse {
 
     private long id;
 
-    private String text;
+    private String content;
 
     private boolean isAnswer;
 
