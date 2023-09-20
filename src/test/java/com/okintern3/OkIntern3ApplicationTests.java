@@ -1,17 +1,18 @@
 package com.okintern3;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+
 import com.okintern3.entity.Category;
 import com.okintern3.entity.Quiz;
 import com.okintern3.entity.QuizOption;
 import com.okintern3.entity.QuizType;
 import com.okintern3.repository.CategoryRepository;
 import com.okintern3.repository.QuizRepository;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 class OkIntern3ApplicationTests {
@@ -21,9 +22,6 @@ class OkIntern3ApplicationTests {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
-
-	@Autowired
-	private MockMvc mockMvc;
 
 	@Test
 	void contextLoads() {
