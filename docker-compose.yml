@@ -1,12 +1,13 @@
+
 version: '3'
 services:
   mariadb:
     image: mariadb:latest
     environment:
-      MYSQL_ROOT_PASSWORD: okestro123
-      MYSQL_DATABASE: weekthon
-      MYSQL_USER: km
-      MYSQL_PASSWORD: okestro
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: 
+      MYSQL_USER: 
+      MYSQL_PASSWORD: 
     ports:
       - "3306:3306"
     volumes:
@@ -21,9 +22,9 @@ services:
     depends_on:
       - mariadb
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://34.64.253.107:3306/weekthon
-      SPRING_DATASOURCE_USERNAME: km
-      SPRING_DATASOURCE_PASSWORD: okestro
+      SPRING_DATASOURCE_URL: 
+      SPRING_DATASOURCE_USERNAME:
+      SPRING_DATASOURCE_PASSWORD:
 
 volumes:
   mariadb-data:
