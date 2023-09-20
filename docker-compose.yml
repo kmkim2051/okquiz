@@ -1,0 +1,29 @@
+version: '3'
+services:
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: okestro123
+      MYSQL_DATABASE: weekthon
+      MYSQL_USER: km
+      MYSQL_PASSWORD: okestro
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb-data:/var/lib/mysql
+
+  # Spring Boot
+  spring-app:
+    build:
+      context: ./okintern3  # Path to your Spring Boot app's Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mariadb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://34.64.253.107:3306/weekthon
+      SPRING_DATASOURCE_USERNAME: km
+      SPRING_DATASOURCE_PASSWORD: okestro
+
+volumes:
+  mariadb-data:
