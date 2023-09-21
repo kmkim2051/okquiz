@@ -3,14 +3,13 @@ package com.okintern3.service;
 import java.util.List;
 import java.util.Random;
 
+import com.okintern3.dto.*;
+import com.okintern3.exception.AnswerNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
-import com.okintern3.dto.QuizCreateRequest;
-import com.okintern3.dto.QuizReadResponse;
-import com.okintern3.dto.QuizTakeDto;
 import com.okintern3.entity.Category;
 import com.okintern3.entity.Quiz;
 import com.okintern3.entity.QuizOption;
@@ -19,7 +18,6 @@ import com.okintern3.exception.QuizNotFoundException;
 import com.okintern3.repository.CategoryRepository;
 import com.okintern3.repository.QuizLogRepository;
 import com.okintern3.repository.QuizRepository;
-import com.okintern3.dto.QuizOptionRequest;
 import com.okintern3.entity.QuizType;
 import com.okintern3.exception.InvalidQuizOptionException;
 
@@ -61,6 +59,11 @@ public class QuizServiceImpl implements QuizService {
                 throw new InvalidQuizOptionException("OX 퀴즈의 선택지는 O와 X를 모두 포함해야 합니다.");
             }
         }
+
+        options.stream()
+                .filter(QuizOptionRequest::getIsAnswer)
+                .findFirst()
+                .orElseThrow(() -> new AnswerNotFoundException("퀴즈에 정답 선택지가 존재하지 않습니다."));
     }
 
     @Override
@@ -94,7 +97,6 @@ public class QuizServiceImpl implements QuizService {
 
         final int NUMBER_OF_QUIZ_IN_TEST = 15;
 
-        // todo: 공통 예외처리
         final Category category = categoryRepository
                 .findByName(categoryName)
                 .orElseThrow(() -> new CategoryNotFoundException("존재하지 않는 카테고리 이름입니다."));
