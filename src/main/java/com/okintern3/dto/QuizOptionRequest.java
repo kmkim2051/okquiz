@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class QuizOptionRequest {
 
     @JsonProperty("text")
+    @NotNull
     private String content;
 
     @NotNull
