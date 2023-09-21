@@ -100,7 +100,3 @@ Temporary Items
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
-
-# 추후 시크릿 정보 암호화하여 깃헙에 올라가도록 변경
-application.yml
-application*.yml

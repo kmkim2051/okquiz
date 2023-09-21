@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: ENC(/8GHirnXpGdmfxdP77AmAbQOvpaUgrK32f2c+Ge1orhu24pq/KaNkK7Vba7er75O)
+    username: ENC(qu/hd95zEjlY7KwnmLJdVA==)
+    password: ENC(qa3/SyitnaOZJA6Ts+STxQ==)
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME}
+
+  jpa:
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
+    show-sql: true # Set to true to show SQL queries in logs (for debugging)
+    properties:
+      hibernate:
+        dialect: ${SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT}
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+    key: ${JASYPT_ENCRYPTOR_KEY}

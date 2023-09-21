@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: ENC(8kqIloohZrABKX6JFNwvdx3hpbpHhbIk1dvFIm4MwWTaYpTZOxEppLTkxqs0S5mB)
+    username: ENC(qu/hd95zEjlY7KwnmLJdVA==)
+    password: ENC(qa3/SyitnaOZJA6Ts+STxQ==)
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true # Set to true to show SQL queries in logs (for debugging)
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
