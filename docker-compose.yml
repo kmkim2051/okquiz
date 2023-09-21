@@ -4,10 +4,10 @@ services:
   mariadb:
     image: mariadb:latest
     environment:
-      MYSQL_ROOT_PASSWORD: 
-      MYSQL_DATABASE: 
-      MYSQL_USER: 
-      MYSQL_PASSWORD: 
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
@@ -15,20 +15,16 @@ services:
 
   # Spring Boot
   spring-app:
-    build:
-      context: ./okintern3  # Path to your Spring Boot app's Dockerfile
+    image: oquestro:latest
     ports:
-      - "8080:8080"
+      - "8082:8080"
     depends_on:
       - mariadb
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/weekthon
-      SPRING_DATASOURCE_USERNAME: km
-      SPRING_DATASOURCE_PASSWORD: okestro
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.mariadb.jdbc.Driver
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MariaDBDialect
       SPRING_PROFILES_ACTIVE: production
-
+      JASYPT_ENCRYPTOR_KEY: ${JASYPT_ENCRYPTOR_KEY}
 volumes:
   mariadb-data:
