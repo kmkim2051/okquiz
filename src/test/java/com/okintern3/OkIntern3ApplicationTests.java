@@ -1,7 +1,10 @@
 package com.okintern3;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
@@ -13,12 +16,19 @@ import com.okintern3.entity.QuizOption;
 import com.okintern3.entity.QuizType;
 import com.okintern3.repository.CategoryRepository;
 import com.okintern3.repository.QuizRepository;
+import com.okintern3.dto.QuizCreateRequest;
+import com.okintern3.dto.QuizOptionRequest;
+import com.okintern3.dto.QuizReadResponse;
+import com.okintern3.service.QuizService;
 
 @SpringBootTest
 class OkIntern3ApplicationTests {
 
 	@Autowired
 	private QuizRepository quizRepository;
+
+	@Autowired
+	private QuizService quizService;
 
 	@Autowired
 	private CategoryRepository categoryRepository;
@@ -34,7 +44,7 @@ class OkIntern3ApplicationTests {
 	}
 
 	@Test
-	void 퀴즈_생성_확인() {
+	void 퀴즈_생성_확인_엔티티() {
 		// given
 		Category category = new Category("클라우드");
 
@@ -52,5 +62,41 @@ class OkIntern3ApplicationTests {
 		// then
 		Assertions.assertThat(findQuiz.getQuestion()).isEqualTo("question1");
 		Assertions.assertThat(findQuiz.getQuizType()).isEqualTo(QuizType.MULTI_OPTION);
+	}
+
+	@Test
+	@Transactional
+	void 퀴즈_생성_확인_서비스() {
+		Category c1 = new Category("test");
+		categoryRepository.save(c1);
+
+		QuizOptionRequest option1 = new QuizOptionRequest(
+				"opt1",
+				true,
+				"desc1"
+		);
+
+		QuizOptionRequest option2 = new QuizOptionRequest(
+				"opt2",
+				false,
+				"desc2"
+		);
+
+		QuizCreateRequest request = new QuizCreateRequest(
+				c1.getName(),
+				"q1",
+				QuizType.MULTI_OPTION,
+				List.of(option1, option2)
+		);
+
+		quizService.createQuiz(request);
+
+		QuizReadResponse quizTest = quizService.getQuizzesByCategoryName("test")
+				.stream()
+				.findFirst()
+				.orElse(null);
+
+		Assertions.assertThat(quizTest.getQuestion()).isEqualTo((request.getQuestion()));
+		Assertions.assertThat(quizTest.getOptions().size()).isEqualTo(2);
 	}
 }

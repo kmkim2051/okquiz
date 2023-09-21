@@ -1,21 +1,24 @@
 package com.okintern3.service;
 
+import java.util.List;
+import java.util.Random;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.RequiredArgsConstructor;
+
 import com.okintern3.dto.QuizCreateRequest;
 import com.okintern3.dto.QuizReadResponse;
-import com.okintern3.dto.QuizTakeRequest;
+import com.okintern3.dto.QuizTakeDto;
 import com.okintern3.entity.Category;
-import com.okintern3.entity.QuizLog;
+import com.okintern3.entity.Quiz;
+import com.okintern3.entity.QuizOption;
 import com.okintern3.exception.CategoryNotFoundException;
 import com.okintern3.exception.QuizNotFoundException;
 import com.okintern3.repository.CategoryRepository;
 import com.okintern3.repository.QuizLogRepository;
 import com.okintern3.repository.QuizRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +33,23 @@ public class QuizServiceImpl implements QuizService {
     @Override
     @Transactional
     public void createQuiz(QuizCreateRequest request) {
-        // quiz Option에 answer는 최소 하나 있어야함
+        Category category = categoryRepository.findByName(request.getCategoryName())
+                .orElseThrow(() -> new CategoryNotFoundException("존재하지 않는 카테고리 이름입니다."));
+
+        Quiz quiz = new Quiz(
+                request.getQuestion(),
+                category,
+                request.getQuizType());
+
+        request.getOptions()
+                .forEach(option -> new QuizOption(
+                        option.getContent(),
+                        option.isAnswer(),
+                        quiz,
+                        option.getDescription()
+                ));
+
+        quizRepository.save(quiz);
     }
 
     @Override
@@ -60,11 +79,10 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     @Transactional
-    public void takeQuiz(QuizTakeRequest request) {
-        Long quizId = request.getQuizId();
-        quizRepository.findById(quizId)
+    public void takeQuiz(QuizTakeDto quizTakeDto) {
+        quizRepository.findById(quizTakeDto.getQuizId())
                 .orElseThrow(() -> new QuizNotFoundException("존재하지 않는 퀴즈 id입니다."));
         // 퀴즈 응시
-        quizLogRepository.save(request.toEntity());
+        quizLogRepository.save(quizTakeDto.toEntity());
     }
 }

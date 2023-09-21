@@ -1,6 +1,7 @@
 package com.okintern3.entity;
 
 import jakarta.persistence.*;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -34,5 +35,10 @@ public class QuizOption {
         this.isAnswer = isAnswer;
         this.quiz = quiz;
         quiz.addOption(this);
+    }
+
+    // lombok이 'is' prefix 필드의 getter를 필드명 그대로 만드는 것 방지
+    public boolean getIsAnswer() {
+        return isAnswer;
     }
 }

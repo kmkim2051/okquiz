@@ -1,7 +1,8 @@
 package com.okintern3.common;
 
-import lombok.Getter;
 import java.util.List;
+
+import lombok.Getter;
 
 @Getter
 public class ApiResponse<T> {

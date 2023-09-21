@@ -1,11 +1,12 @@
 package com.okintern3.repository;
 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.okintern3.entity.Category;
 import com.okintern3.entity.Quiz;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 
 public interface QuizRepository extends JpaRepository<Quiz, Long> {
 

@@ -1,11 +1,14 @@
 package com.okintern3.service;
 
-import com.okintern3.dto.CategoryResponse;
-import com.okintern3.repository.CategoryRepository;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
+
+import com.okintern3.dto.CategoryResponse;
+import com.okintern3.repository.CategoryRepository;
+
 
 @Service
 @RequiredArgsConstructor

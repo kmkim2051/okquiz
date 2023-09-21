@@ -1,10 +1,10 @@
 package com.okintern3.service;
 
+import java.util.List;
+
 import com.okintern3.dto.QuizCreateRequest;
 import com.okintern3.dto.QuizReadResponse;
-import com.okintern3.dto.QuizTakeRequest;
-
-import java.util.List;
+import com.okintern3.dto.QuizTakeDto;
 
 public interface QuizService {
 
@@ -12,5 +12,5 @@ public interface QuizService {
 
     List<QuizReadResponse> getQuizzesByCategoryName(String categoryName);
 
-    void takeQuiz(QuizTakeRequest request);
+    void takeQuiz(QuizTakeDto quizTakeDto);
 }

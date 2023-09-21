@@ -1,14 +1,15 @@
 package com.okintern3.controller;
 
-import com.okintern3.common.ApiResponse;
-import com.okintern3.dto.CategoryResponse;
-import com.okintern3.entity.Category;
-import com.okintern3.service.CategoryService;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
+
+import com.okintern3.common.ApiResponse;
+import com.okintern3.dto.CategoryResponse;
+import com.okintern3.service.CategoryService;
 
 @RestController
 @RequiredArgsConstructor

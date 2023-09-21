@@ -1,14 +1,17 @@
 package com.okintern3.controller;
 
-import com.okintern3.common.ApiResponse;
-import com.okintern3.dto.QuizReadResponse;
-import com.okintern3.dto.QuizTakeRequest;
-import com.okintern3.service.QuizService;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
+
+import com.okintern3.common.ApiResponse;
+import com.okintern3.dto.QuizCreateRequest;
+import com.okintern3.dto.QuizReadResponse;
+import com.okintern3.dto.QuizTakeDto;
+import com.okintern3.dto.QuizTakeRequest;
+import com.okintern3.service.QuizService;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,9 +25,18 @@ public class QuizController {
         return ApiResponse.success(quizzes);
     }
 
-    @PostMapping("/{category}/test/quiz")
-    public ApiResponse solveQuiz(@RequestBody QuizTakeRequest quizTakeRequest) {
-        quizService.takeQuiz(quizTakeRequest);
+    @PostMapping("/test/quizzes/{quizId}")
+    public ApiResponse solveQuiz(@PathVariable("quizId") Long quizId, @RequestBody QuizTakeRequest quizTakeRequest) {
+        QuizTakeDto quizTakeDto = new QuizTakeDto(quizId, quizTakeRequest.getIsCorrect());
+
+        quizService.takeQuiz(quizTakeDto);
         return ApiResponse.success();
     }
+
+    @PostMapping("/quizzes")
+    public ApiResponse makeQuiz(@RequestBody QuizCreateRequest quizCreateRequest) {
+        quizService.createQuiz(quizCreateRequest);
+        return ApiResponse.success();
+    }
+
 }

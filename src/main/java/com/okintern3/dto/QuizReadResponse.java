@@ -1,13 +1,14 @@
 package com.okintern3.dto;
 
-import com.okintern3.entity.Quiz;
-import com.okintern3.entity.QuizType;
-import com.okintern3.exception.AnswerNotFoundException;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import com.okintern3.entity.Quiz;
+import com.okintern3.entity.QuizType;
+import com.okintern3.exception.AnswerNotFoundException;
 
 @Getter
 @Setter
@@ -45,7 +46,7 @@ public class QuizReadResponse {
                 options,
                 answer,
                 -1,
-                answer.getDesc(),
+                answer.getDescription(),
                 quiz.getQuizType()
         );
     }

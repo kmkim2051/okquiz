@@ -1,9 +1,10 @@
 package com.okintern3.repository;
 
-import com.okintern3.entity.QuizLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import com.okintern3.entity.QuizLog;
 
 public interface QuizLogRepository extends JpaRepository<QuizLog, Long> {
     @Query("SELECT COUNT(ql) FROM QuizLog ql WHERE ql.quizId = :quizId and ql.isCorrect = true")

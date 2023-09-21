@@ -1,8 +1,9 @@
 package com.okintern3.dto;
 
-import com.okintern3.entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
+import com.okintern3.entity.Category;
 
 @Getter
 @AllArgsConstructor
