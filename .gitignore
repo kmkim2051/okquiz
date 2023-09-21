@@ -93,6 +93,7 @@ Temporary Items
 *.nar
 *.ear
 *.zip
+*.tar
 *.tar.gz
 *.rar
 
