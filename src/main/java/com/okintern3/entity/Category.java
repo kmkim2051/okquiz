@@ -14,6 +14,7 @@ public class Category extends BaseTimeEntity {
     @Column(name = "category_id")
     private Long id;
 
+    @Column(unique = true)
     private String name;
 
     public Category(String name) {

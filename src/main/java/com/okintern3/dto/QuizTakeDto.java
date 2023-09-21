@@ -9,6 +9,7 @@ import com.okintern3.exception.QuizNotFoundException;
 @Getter
 @AllArgsConstructor
 public class QuizTakeDto {
+    
     private Long quizId;
 
     private boolean isCorrect;

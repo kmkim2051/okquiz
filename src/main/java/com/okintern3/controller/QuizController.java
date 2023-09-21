@@ -2,6 +2,7 @@ package com.okintern3.controller;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class QuizController {
     }
 
     @PostMapping("/test/quizzes/{quizId}")
-    public ApiResponse solveQuiz(@PathVariable("quizId") Long quizId, @RequestBody QuizTakeRequest quizTakeRequest) {
+    public ApiResponse solveQuiz(@PathVariable("quizId") Long quizId, @Valid @RequestBody QuizTakeRequest quizTakeRequest) {
         QuizTakeDto quizTakeDto = new QuizTakeDto(quizId, quizTakeRequest.getIsCorrect());
 
         quizService.takeQuiz(quizTakeDto);
@@ -34,7 +35,7 @@ public class QuizController {
     }
 
     @PostMapping("/quizzes")
-    public ApiResponse makeQuiz(@RequestBody QuizCreateRequest quizCreateRequest) {
+    public ApiResponse makeQuiz(@Valid @RequestBody QuizCreateRequest quizCreateRequest) {
         quizService.createQuiz(quizCreateRequest);
         return ApiResponse.success();
     }

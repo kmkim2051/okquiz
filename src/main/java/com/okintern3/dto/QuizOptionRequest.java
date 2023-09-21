@@ -1,5 +1,7 @@
 package com.okintern3.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 import lombok.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,13 +12,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class QuizOptionRequest {
 
     @JsonProperty("text")
+    @NotNull
     private String content;
 
-    private boolean isAnswer;
+    @NotNull
+    private Boolean isAnswer;
 
-    private String description;
+    private String description; // nullable
 
-    public void setIsAnswer(boolean isAnswer) {
+    public void setIsAnswer(Boolean isAnswer) {
         this.isAnswer = isAnswer;
     }
 }
