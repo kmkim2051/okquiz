@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ENC(8kqIloohZrABKX6JFNwvdx3hpbpHhbIk1dvFIm4MwWTaYpTZOxEppLTkxqs0S5mB)
+    url: ENC(bziqFvKm0CWkgmSZpfheYN43UshlxWQWsAIS+oLcHAhc38jtrqWPRsDQqJaqRVWW1+bD2xka4bY0f/7HnskB+ez97rm8GmuZUnSq0sHL5u4=)
     username: ENC(qu/hd95zEjlY7KwnmLJdVA==)
     password: ENC(qa3/SyitnaOZJA6Ts+STxQ==)
     driver-class-name: org.mariadb.jdbc.Driver
@@ -12,6 +12,8 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MariaDBDialect
+        jdbc:
+          time_zone: Asia/Seoul
 
 jasypt:
   encryptor:

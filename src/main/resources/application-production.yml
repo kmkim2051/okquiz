@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ENC(/8GHirnXpGdmfxdP77AmAbQOvpaUgrK32f2c+Ge1orhu24pq/KaNkK7Vba7er75O)
+    url: ENC(Zlpmye/G6JSato4Gc3qEh0O2XZQFk2qvbeb/nSArJAmEMismOhcBhb5IwnXADdcRgNIZv2+bTEInNYrf6XxC5B2Z5HsjnBc+)
     username: ENC(qu/hd95zEjlY7KwnmLJdVA==)
     password: ENC(qa3/SyitnaOZJA6Ts+STxQ==)
     driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME}
@@ -12,6 +12,8 @@ spring:
     properties:
       hibernate:
         dialect: ${SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT}
+        jdbc:
+          time_zone: Asia/Seoul
 
 jasypt:
   encryptor:
