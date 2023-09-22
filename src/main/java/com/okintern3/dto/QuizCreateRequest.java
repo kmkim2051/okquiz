@@ -2,6 +2,7 @@ package com.okintern3.dto;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -18,6 +19,7 @@ import com.okintern3.entity.QuizType;
 public class QuizCreateRequest {
 
     @JsonProperty("category")
+    @NotBlank
     private String categoryName;
 
     @NotBlank
@@ -26,6 +28,7 @@ public class QuizCreateRequest {
     @NotNull
     private QuizType quizType;
 
+    @Valid
     @NotEmpty(message = "option은 하나 이상 존재해야 합니다.")
     private List<QuizOptionRequest> options;
 }
